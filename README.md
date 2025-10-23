@@ -21,7 +21,7 @@ Features
 
 Tech Stack
 
-Frontend: Vue.js (Vite, Pinia, Vue Router)
+Frontend: React
 
 Backend: Python (FastAPI)
 
