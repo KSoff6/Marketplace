@@ -1,6 +1,6 @@
 Marketplace
 
-A modern Marketplace application built with Vue.js on the frontend and Python on the backend.
+A modern Marketplace application built with React on the frontend and Python on the backend.
 The project aims to provide a scalable, modular, and user-friendly platform for buying and selling products online.
 
 Features
@@ -42,7 +42,7 @@ Modular codebase for quick feature expansion
 
 Marketplace
 
-Современное приложение Marketplace, фронтенд на Vue.js, бэкенд на Python.
+Современное приложение Marketplace, фронтенд на React, бэкенд на Python.
 Проект создаётся как масштабируемая, модульная и удобная платформа для покупки и продажи товаров онлайн.
 
 Возможности
