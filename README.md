@@ -63,7 +63,7 @@ Marketplace
 
 Технологический стек
 
-Frontend: Vue.js (Vite, Pinia, Vue Router)
+Frontend: React
 
 Backend: Python (FastAPI)
 
