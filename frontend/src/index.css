@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-medium: "Onest-Medium", sans-serif;
+  --font-regular: "Onest-Regular", sans-serif;
+}
+
+:root {
+  --color-282626: #282626;
+  --color-fcfcf880: #fcfcf880;
+  --color-fcfcf8: #fcfcf8;
+  --color-ffebadb2: #ffebadb2;
+  --color-ffdd84: #ffdd84;
+  --color-ded9c9: #ded9c9;
+  --color-1a1a1a: #1a1a1a;
+}
+@font-face {
+  font-family: "Onest-Medium";
+  src: url(../fonts/Onest-Medium.ttf) format("trueType");
+}
+
+@font-face {
+  font-family: "Onest-Regular";
+  src: url(../fonts/Onest-Regular.ttf) format("trueType");
+}
