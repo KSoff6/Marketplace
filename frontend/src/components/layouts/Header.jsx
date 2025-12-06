@@ -1,5 +1,6 @@
 import SearchBar from "@components/ui/SearchBar";
 import logo from "@assets/icons/logo-header.svg";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -48,8 +49,8 @@ export default function Header() {
             </a>
           </li>
           <li className="">
-            <a
-              href="#"
+            <NavLink
+              to={"/cart"}
               className="group flex flex-col items-center px-2 py-2 rounded-2xl bg-(--color-282626) hover:bg-(--color-ffdd84) transition-colors duration-100"
             >
               {/* Иконка */}
@@ -75,11 +76,11 @@ export default function Header() {
               <p className="text-(--color-fcfcf8) group-hover:text-(--color-282626) font-regular text-sm transition-colors duration-200">
                 Заказы
               </p>
-            </a>
+            </NavLink>
           </li>
           <li className="">
-            <a
-              href="#"
+            <NavLink
+              to={"/cart"}
               className="group flex flex-col items-center px-2 py-2 rounded-2xl bg-(--color-282626) hover:bg-(--color-ffdd84) transition-colors duration-100"
             >
               {/* Иконка */}
@@ -105,11 +106,11 @@ export default function Header() {
               <p className="text-(--color-fcfcf8) group-hover:text-(--color-282626) font-regular text-sm transition-colors duration-200">
                 Корзина
               </p>
-            </a>
+            </NavLink>
           </li>
           <li className="">
-            <a
-              href="#"
+            <NavLink
+              to={"/login"}
               className="group flex flex-col items-center px-2 py-2 rounded-2xl bg-(--color-282626) hover:bg-(--color-ffdd84) transition-colors duration-100 w-[60px] h-[60px]"
             >
               {/* Иконка */}
@@ -129,7 +130,7 @@ export default function Header() {
                   <path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6"></path>
                 </svg>
               </div>
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
