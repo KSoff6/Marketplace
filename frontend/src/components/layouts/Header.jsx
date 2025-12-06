@@ -6,7 +6,9 @@ export default function Header() {
     <header className="flex items-center justify-between bg-white shadow-md max-w-7xl w-full h-24 px-6 mx-auto">
       {/* Logo */}
       <div className="flex items-center">
-        <img src={logo} alt="logo beezy" className="h-12 object-contain" />
+        <a href="#">
+          <img src={logo} alt="logo beezy" className="h-12 object-contain" />
+        </a>
       </div>
 
       <nav className="flex justify-between gap-6 flex-1 ml-6">
