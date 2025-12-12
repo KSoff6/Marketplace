@@ -1,13 +1,30 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from .database import get_db
+from .database import get_db, init_db
 from .models import User, Product
 from .schemas import UserCreate, UserResponse, ProductCreate, ProductResponse
 from fastapi.security import HTTPBearer
-from .auth import create_access_token
+from .auth import create_access_token, get_current_user
 
 app = FastAPI(title="Marketplace API")
+
+origins = [
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins, 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.on_event("startup")
+def on_startup():
+    init_db()
 
 @app.get("/")
 def read_root():
@@ -28,13 +45,13 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == user_data.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email уже зарегистрирован")
-    user = User(email=user_data.email, password_hash=user_data.password, role="buyer")
+    user = User(email=user_data.email, password_hash=user_data.password, role="seller")
     db.add(user)
     db.commit()
     db.refresh(user)
     return UserResponse(**user.__dict__)
 
-@app.post("/auth/login")  # ← ЭТОТ ЭНДПОИНТ!
+@app.post("/auth/login")
 def login(user_data: UserCreate, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == user_data.email).first()
     if not user or user.password_hash != user_data.password:
@@ -55,8 +72,18 @@ def get_products(db: Session = Depends(get_db), skip: int = 0, limit: int = 10):
     return [ProductResponse(**p.__dict__) for p in products]
 
 @app.post("/products/", response_model=ProductResponse)
-def create_product(product_data: ProductCreate, db: Session = Depends(get_db)):
-    product = Product(**product_data.dict(), seller_id=1)
+def create_product(
+    product_data: ProductCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    if current_user.role != "seller":
+        raise HTTPException(status_code=403, detail="Только продавцы могут создавать товары")
+
+    product = Product(
+        **product_data.dict(),
+        seller_id=current_user.id,
+    )
     db.add(product)
     db.commit()
     db.refresh(product)
